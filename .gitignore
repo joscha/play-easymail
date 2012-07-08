@@ -4,3 +4,5 @@ samples/play-easymail-usage/.settings
 samples/play-easymail-usage/.target
 .classpath
 .project
+code/bin
+samples/play-easymail-usage/bin

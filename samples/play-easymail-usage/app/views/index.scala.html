@@ -1,0 +1,14 @@
+@(f: Form[Application.MailMe])
+
+@import helper._
+
+@main("Welcome to Play 2.0") {
+    
+    @form(routes.Application.sendMail) {
+    	@inputText(
+    		f("email")
+    	)
+    	
+    	<input type="submit" value="OK">
+    }
+}

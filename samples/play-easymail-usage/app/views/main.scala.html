@@ -1,0 +1,15 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+    </head>
+    <body>
+        @if(flash().contains("message")) {
+          <p style="color: green;">@flash().get("message")</p>
+        }
+        @content
+    </body>
+</html>

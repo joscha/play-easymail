@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0" xmlns:e="http://ant.apache.org/ivy/extra">
-	<info organisation="com.feth" module="play-easymail_2.9.1" revision="0.1-SNAPSHOT" status="release" publication="20120709005739">
+	<info organisation="com.feth" module="play-easymail_2.9.1" revision="0.1-SNAPSHOT" status="release" publication="20120709200902">
 		<description>
 		play-easymail
 		</description>
@@ -29,7 +29,7 @@
 		<dependency org="org.scala-lang" name="scala-library" rev="2.9.1" conf="compile->default(compile)"/>
 		<dependency org="play" name="play_2.9.1" rev="2.0.2" conf="compile->default(compile)"/>
 		<dependency org="play" name="play-test_2.9.1" rev="2.0.2" conf="test->default(compile)"/>
-		<dependency org="com.typesafe" name="play-plugins-mailer_2.9.1" rev="2.0.2" conf="compile->default(compile)"/>
+		<dependency org="com.typesafe" name="play-plugins-mailer_2.9.1" rev="2.0.4" conf="compile->default(compile)"/>
 		<exclude org="org.scala-lang" module="scala-library" artifact="*" type="jar" ext="*" matcher="exact"/>
 		<exclude org="org.scala-lang" module="scala-compiler" artifact="*" type="jar" ext="*" matcher="exact"/>
 		<override org="org.scala-lang" module="scala-library" matcher="exact" rev="2.9.1"/>

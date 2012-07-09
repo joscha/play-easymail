@@ -10,6 +10,6 @@ object ApplicationBuild extends Build {
     val main = PlayProject(appName, libVersion).settings(
       	version := libVersion,
      	organization := "com.feth",
-      	libraryDependencies += "com.typesafe" %% "play-plugins-mailer" % "2.0.2"
+      	libraryDependencies += "com.typesafe" %% "play-plugins-mailer" % "2.0.4"
     )
 }

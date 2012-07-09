@@ -1,0 +1,11 @@
+code/bin
+code/project/project/target
+code/project/target
+code/target
+.classpath
+.project
+org.scala-ide.sdt.core.prefs
+samples/play-easymail-usage/.target
+samples/play-easymail-usage/bin
+samples/play-easymail-usage/logs
+samples/play-easymail-usage/target

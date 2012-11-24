@@ -10,6 +10,8 @@ import play.mvc.*;
 
 import views.html.index;
 
+import static play.data.Form.form;
+
 public class Application extends Controller {
 
 	public static class MailMe {

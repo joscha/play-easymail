@@ -1,16 +1,15 @@
 package com.feth.play.module.mail;
 
-import java.util.concurrent.TimeUnit;
-
-import play.Configuration;
-import play.libs.Akka;
 import akka.actor.Cancellable;
-import akka.util.Duration;
-import akka.util.FiniteDuration;
+import com.feth.play.module.mail.Mailer.Mail.Body;
 import com.typesafe.plugin.MailerAPI;
 import com.typesafe.plugin.MailerPlugin;
+import play.Configuration;
+import play.libs.Akka;
+import scala.concurrent.duration.Duration;
+import scala.concurrent.duration.FiniteDuration;
 
-import com.feth.play.module.mail.Mailer.Mail.Body;
+import java.util.concurrent.TimeUnit;
 
 public class Mailer {
 
@@ -216,7 +215,7 @@ public class Mailer {
 	public Cancellable sendMail(final Mail email) {
 		email.setFrom(sender);
 		return Akka.system().scheduler()
-				.scheduleOnce(delay, new MailJob(email));
+				.scheduleOnce(delay, new MailJob(email), Akka.system().dispatcher());
 	}
 
 	public Cancellable sendMail(final String subject, final Body body,

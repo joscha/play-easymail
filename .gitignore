@@ -9,3 +9,8 @@ samples/play-easymail-usage/.target
 samples/play-easymail-usage/bin
 samples/play-easymail-usage/logs
 samples/play-easymail-usage/target
+code/logs
+code/.settings
+samples/play-easymail-usage/.settings
+samples/play-easymail-usage/project/project/target
+samples/play-easymail-usage/project/target

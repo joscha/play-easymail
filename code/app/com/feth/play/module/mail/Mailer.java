@@ -1,15 +1,21 @@
 package com.feth.play.module.mail;
 
-import akka.actor.Cancellable;
-import com.feth.play.module.mail.Mailer.Mail.Body;
-import com.typesafe.plugin.MailerAPI;
-import com.typesafe.plugin.MailerPlugin;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
+
 import play.Configuration;
 import play.libs.Akka;
 import scala.concurrent.duration.Duration;
 import scala.concurrent.duration.FiniteDuration;
+import akka.actor.Cancellable;
 
-import java.util.concurrent.TimeUnit;
+import com.feth.play.module.mail.Mailer.Mail.Body;
+import com.typesafe.plugin.MailerAPI;
+import com.typesafe.plugin.MailerPlugin;
 
 public class Mailer {
 
@@ -138,9 +144,16 @@ public class Mailer {
 		private final String[] recipients;
 		private String from;
 		private final Body body;
+		private final Map<String, List<String>> customHeaders;
 
 		public Mail(final String subject, final Body body,
 				final String[] recipients) {
+			this(subject, body, recipients, null);
+		}
+
+		public Mail(final String subject, final Body body,
+				final String[] recipients,
+				Map<String, List<String>> customHeaders) {
 			if (subject == null || subject.trim().isEmpty()) {
 				throw new RuntimeException("Subject must not be null or empty");
 			}
@@ -157,6 +170,12 @@ public class Mailer {
 						"There must be at least one recipient");
 			}
 			this.recipients = recipients;
+
+			if (customHeaders != null) {
+				this.customHeaders = customHeaders;
+			} else {
+				this.customHeaders = Collections.emptyMap();
+			}
 		}
 
 		public String getSubject() {
@@ -179,6 +198,13 @@ public class Mailer {
 			return body;
 		}
 
+		public Map<String, List<String>> getCustomHeaders() {
+			return customHeaders;
+		}
+
+		public void addCustomHeader(String name, String... values) {
+			this.customHeaders.put(name, Arrays.asList(values));
+		}
 	}
 
 	private class MailJob implements Runnable {
@@ -197,6 +223,17 @@ public class Mailer {
 			api.addRecipient(mail.getRecipients());
 			api.addFrom(mail.getFrom());
 			api.addHeader("X-Mailer", MAILER + getVersion());
+
+			final Map<String, List<String>> customHeaders = mail
+					.getCustomHeaders();
+			for (Entry<String, List<String>> entry : customHeaders.entrySet()) {
+				String headerName = entry.getKey();
+				List<String> headerValues = entry.getValue();
+				for (String headerValue : headerValues) {
+					api.addHeader(headerName, headerValue);
+				}
+			}
+
 			if (mail.getBody().isBoth()) {
 				// sends both text and html
 				api.send(mail.getBody().getText(), mail.getBody().getHtml());

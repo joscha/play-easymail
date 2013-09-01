@@ -153,7 +153,7 @@ public class Mailer {
 
 		public Mail(final String subject, final Body body,
 				final String[] recipients,
-				Map<String, List<String>> customHeaders) {
+				final Map<String, List<String>> customHeaders) {
 			if (subject == null || subject.trim().isEmpty()) {
 				throw new RuntimeException("Subject must not be null or empty");
 			}
@@ -224,12 +224,10 @@ public class Mailer {
 			api.addFrom(mail.getFrom());
 			api.addHeader("X-Mailer", MAILER + getVersion());
 
-			final Map<String, List<String>> customHeaders = mail
-					.getCustomHeaders();
-			for (Entry<String, List<String>> entry : customHeaders.entrySet()) {
-				String headerName = entry.getKey();
-				List<String> headerValues = entry.getValue();
-				for (String headerValue : headerValues) {
+			for (final Entry<String, List<String>> entry : mail
+					.getCustomHeaders().entrySet()) {
+				final String headerName = entry.getKey();
+				for (final String headerValue : entry.getValue()) {
 					api.addHeader(headerName, headerValue);
 				}
 			}
@@ -251,8 +249,11 @@ public class Mailer {
 
 	public Cancellable sendMail(final Mail email) {
 		email.setFrom(sender);
-		return Akka.system().scheduler()
-				.scheduleOnce(delay, new MailJob(email), Akka.system().dispatcher());
+		return Akka
+				.system()
+				.scheduler()
+				.scheduleOnce(delay, new MailJob(email),
+						Akka.system().dispatcher());
 	}
 
 	public Cancellable sendMail(final String subject, final Body body,

@@ -220,8 +220,8 @@ public class Mailer {
 			final MailerAPI api = plugin.email();
 
 			api.setSubject(mail.getSubject());
-			api.addRecipient(mail.getRecipients());
-			api.addFrom(mail.getFrom());
+			api.setRecipient(mail.getRecipients());
+			api.setFrom(mail.getFrom());
 			api.addHeader("X-Mailer", MAILER + getVersion());
 
 			for (final Entry<String, List<String>> entry : mail

@@ -12,13 +12,13 @@ The `2_2` branch contains the code for 2.2.x (play-easymail version `0.5` and up
 [![Build Status](https://travis-ci.org/joscha/play-easymail.png?branch=master)](https://travis-ci.org/joscha/play-easymail)
 
 ## Features
-Sending email through an easy-to-use API and allowing for text-only, html-only and mixed emails. Preferrably based on Play! templates (see sample).
+Sending email through an easy-to-use API and allowing for text-only, html-only and mixed emails. Preferably based on Play! templates (see sample).
 
 ## Versions
 * **0.5** [2013-10-23]
-  * Version for Play 2.2.x 
+  * Version for Play 2.2.x
 * **0.3** [2013-09-01]
-  * A mail can now have custom headers (see issue #6) - thanks @jtammen 
+  * A mail can now have custom headers (see issue #6) - thanks @jtammen
 * **0.2** [2013-02-06]
   * Version for 2.1.0
 * **0.1** [2012-07-09]

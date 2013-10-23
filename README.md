@@ -7,6 +7,9 @@ This plugin uses concepts from [Play20StartApp][] to make sending emails (text, 
 
 The `master` branch contains the code for 2.1.x and upwards, whereas the branch `2.0.x` is a maintenance branch for the 2.0.x series of Play! Framework.
 
+### Build status
+[![Build Status](https://travis-ci.org/joscha/play-easymail.png?branch=master)](https://travis-ci.org/joscha/play-easymail)
+
 ## Features
 Sending email through an easy-to-use API and allowing for text-only, html-only and mixed emails. Preferrably based on Play! templates (see sample).
 

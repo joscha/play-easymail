@@ -10,6 +10,11 @@ libraryDependencies ++= Seq(
   "com.typesafe" % "play-plugins-mailer_2.11" % "2.3.0"
 )
 
+resolvers ++= Seq(
+  // this is only for play-plugins-mailer 2.3.0 as long as it is not yet published to the typesquare repo
+  Resolver.url("play-easymail (release)", url("http://joscha.github.com/play-easymail/repo/releases/"))(Resolver.ivyStylePatterns)
+)
+
 publishArtifact in packageDoc := false
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)

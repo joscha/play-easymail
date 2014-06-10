@@ -1,12 +1,14 @@
-# play-easymail - an extension to the Typesafe mailer plugin for Play! Framework 2 (Java)
+# play-easymail - an extension to the Typesafe mailer plugin for Play! Framework 2.x (Java)
 
 This plugin uses concepts from [Play20StartApp][] to make sending emails (text, html, mixed) easier. A sample is included.
 
 #### Version information
 **play-easymail currently needs Play! Framework 2.x**
 
-The `master` branch contains the code for 2.1.x (play-easymail version `0.2 - 0.3.x`), whereas the branch `2.0.x` is a maintenance branch for the 2.0.x series of Play! Framework (play-easymail version `0.1`).
-The `2_2` branch contains the code for 2.2.x (play-easymail version `0.5` and up).
+The master branch contains the code for Play! Framework 2.3.x (play-easymail version `0.6.0` and up).
+The `2.2.x` branch contains the code for 2.2.x (play-easymail version `0.5 - 0.5.x`).
+The `2.1.x` branch contains the code for 2.1.x (play-easymail version `0.2 - 0.3.x`).
+The `2.0.x` is a maintenance branch for the 2.0.x series of Play! Framework (play-easymail version `0.1`).
 
 ### Build status
 [![Build Status](https://travis-ci.org/joscha/play-easymail.png?branch=master)](https://travis-ci.org/joscha/play-easymail)
@@ -15,6 +17,8 @@ The `2_2` branch contains the code for 2.2.x (play-easymail version `0.5` and up
 Sending email through an easy-to-use API and allowing for text-only, html-only and mixed emails. Preferably based on Play! templates (see sample).
 
 ## Versions
+* **0.6.0** [2014-06-10]
+  * Version for Play 2.3.x
 * **0.5** [2013-10-23]
   * Version for Play 2.2.x
 * **0.3** [2013-09-01]
@@ -26,7 +30,7 @@ Sending email through an easy-to-use API and allowing for text-only, html-only a
 
 ## License
 
-Copyright (c) 2012-2013 Joscha Feth
+Copyright (c) 2012-2014 Joscha Feth
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License. You may obtain a copy of the License in the LICENSE file, or at:
 

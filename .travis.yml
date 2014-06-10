@@ -2,10 +2,10 @@ language: scala
 scala:
   - 2.11.1
 script:
-  - "cd code"
+  - "cd $TRAVIS_BUILD_DIR/code"
   - "sbt ++$TRAVIS_SCALA_VERSION test"
   - "sbt ++$TRAVIS_SCALA_VERSION publish-local"
-  - "cd ../samples/play-easymail-usage"
+  - "cd $TRAVIS_BUILD_DIR/samples/play-easymail-usage"
   - "sbt ++$TRAVIS_SCALA_VERSION test"
 notifications:
   email: false

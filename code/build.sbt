@@ -7,7 +7,7 @@ scalaVersion := "2.11.1"
 version := "0.6.0-SNAPSHOT"
 
 libraryDependencies ++= Seq(
-  "com.typesafe" % "play-plugins-mailer_2.11" % "2.3.0"
+  "com.typesafe" %% "play-plugins-mailer" % "2.3.0"
 )
 
 resolvers ++= Seq(

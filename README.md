@@ -17,6 +17,9 @@ The `2.0.x` is a maintenance branch for the 2.0.x series of Play! Framework (pla
 Sending email through an easy-to-use API and allowing for text-only, html-only and mixed emails. Preferably based on Play! templates (see sample).
 
 ## Versions
+* **0.6.1** [2014-06-29]
+  * Add Scala 2.10.x binary to repository
+  * Test against Scala 2.10.x
 * **0.6.0** [2014-06-10]
   * Version for Play 2.3.x
 * **0.5** [2013-10-23]

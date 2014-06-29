@@ -9,8 +9,8 @@ crossScalaVersions := Seq("2.10.4", "2.11.1")
 version := "0.6.1-SNAPSHOT"
 
 publishTo <<= (version) { version: String =>
-  if (version.trim.endsWith("SNAPSHOT")) Some(Resolver.file("file",  new File( "../repo/snapshots" )))
-  else                                   Some(Resolver.file("file",  new File( "../repo/releases" )))
+  if (version.trim.endsWith("SNAPSHOT")) Some(Resolver.file("file",  new File( "../repo/snapshots" ))(Resolver.ivyStylePatterns))
+  else                                   Some(Resolver.file("file",  new File( "../repo/releases" ))(Resolver.ivyStylePatterns))
 }
 
 libraryDependencies ++= Seq(

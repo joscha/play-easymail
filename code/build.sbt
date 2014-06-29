@@ -14,12 +14,7 @@ publishTo <<= (version) { version: String =>
 }
 
 libraryDependencies ++= Seq(
-  "com.typesafe" %% "play-plugins-mailer" % "2.3.0"
-)
-
-resolvers ++= Seq(
-  // this is only for play-plugins-mailer 2.3.0 as long as it is not yet published to the typesquare repo
-  Resolver.url("play-easymail (release)", url("http://joscha.github.io/play-easymail/repo/releases/"))(Resolver.ivyStylePatterns)
+  "com.typesafe.play.plugins" %% "play-plugins-mailer" % "2.3.0"
 )
 
 publishArtifact in packageDoc := false

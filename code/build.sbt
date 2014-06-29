@@ -2,12 +2,14 @@ organization := "com.feth"
 
 name := "play-easymail"
 
-scalaVersion := "2.11.1"
+scalaVersion := Option(System.getProperty("scala.version")).getOrElse("2.11.1")
 
-version := "0.6.0-SNAPSHOT"
+publishTo := Some(Resolver.file("file",  new File( "../repo/releases" )) )
+
+version := "0.6.1-SNAPSHOT"
 
 libraryDependencies ++= Seq(
-  "com.typesafe" % "play-plugins-mailer_2.11" % "2.3.0"
+  "com.typesafe" %% "play-plugins-mailer" % "2.3.0"
 )
 
 resolvers ++= Seq(

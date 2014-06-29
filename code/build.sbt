@@ -4,9 +4,12 @@ name := "play-easymail"
 
 scalaVersion := Option(System.getProperty("scala.version")).getOrElse("2.11.1")
 
-publishTo := Some(Resolver.file("file",  new File( "../repo/releases" )) )
-
 version := "0.6.1-SNAPSHOT"
+
+publishTo <<= (version) { version: String =>
+  if (version.trim.endsWith("SNAPSHOT")) Some(Resolver.file("file",  new File( "../repo/snapshots" )))
+  else                                   Some(Resolver.file("file",  new File( "../repo/releases" )))
+}
 
 libraryDependencies ++= Seq(
   "com.typesafe" %% "play-plugins-mailer" % "2.3.0"

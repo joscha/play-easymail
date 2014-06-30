@@ -1,3 +1,5 @@
+import play.PlayJava
+
 organization := "com.feth"
 
 name := "play-easymail"

@@ -8,3 +8,7 @@ code/bin
 samples/play-easymail-usage/bin
 target
 repo
+code/.idea
+code/.idea_modules
+samples/play-easymail-usage/.idea
+samples/play-easymail-usage/.idea_modules

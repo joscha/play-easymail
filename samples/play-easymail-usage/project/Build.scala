@@ -9,7 +9,7 @@ object ApplicationBuild extends Build {
 
     val appDependencies = Seq(
     	javaCore,
-      	"com.feth" %% "play-easymail" % "0.5-SNAPSHOT"
+      	"com.feth" %% "play-easymail" % "0.5.1-SNAPSHOT"
     )
 
     val main = play.Project(appName, appVersion, appDependencies).settings(

@@ -12,8 +12,8 @@ libraryDependencies ++= Seq(
 )
 
 resolvers ++= Seq(
-  Resolver.url("play-easymail (release)", url("http://joscha.github.io/play-easymail/repo/releases/"))(Resolver.ivyStylePatterns),
-  Resolver.url("play-easymail (snapshot)", url("http://joscha.github.io/play-easymail/repo/snapshots/"))(Resolver.ivyStylePatterns)
+  "play-easymail (release)" at "http://joscha.github.io/play-easymail/repo/releases/",
+  "play-easymail (snapshot)" at "http://joscha.github.io/play-easymail/repo/snapshots/"
 )
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)

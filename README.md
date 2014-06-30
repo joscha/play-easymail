@@ -37,8 +37,11 @@ You can also have a look at the [sample](samples/play-easymail-usage/app/control
   * ATTENTION: Binaries are not published in ivy style any more, please update your resolver URLs (see [#189](https://github.com/joscha/play-authenticate/issues/189))
 * **0.6.0** [2014-06-10]
   * Version for Play 2.3.x
+* **0.5.1** [2014-07-01]
+  * Backport fix for `addCustomHeader` method
+  * Last version for Play 2.2.x
 * **0.5** [2013-10-23]
-  * Version for Play 2.2.x
+  * First version for Play 2.2.x
 * **0.3** [2013-09-01]
   * A mail can now have custom headers (see issue #6) - thanks @jtammen
 * **0.2** [2013-02-06]

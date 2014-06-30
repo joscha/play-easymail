@@ -18,7 +18,11 @@ Sending email through an easy-to-use API and allowing for text-only, html-only a
 
 ## Code sample
 ```java
-Mailer.getDefaultMailer().sendMail("Your subject", 'Your text body', 'recipient@email.com');
+Mailer.getDefaultMailer().sendMail(
+    "Your subject",
+    "Your text body",
+    "recipient@email.com"
+);
 ```
 You can also have a look at the [sample](samples/play-easymail-usage/app/Application.java) for a more advanced use-case (content from templates and setting custom headers).
 

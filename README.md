@@ -24,7 +24,7 @@ Mailer.getDefaultMailer().sendMail(
     "recipient@email.com"
 );
 ```
-You can also have a look at the [sample](samples/play-easymail-usage/app/Application.java) for a more advanced use-case (content from templates and setting custom headers).
+You can also have a look at the [sample](samples/play-easymail-usage/app/controllers/Application.java) for a more advanced use-case (content from templates and setting custom headers).
 
 ## Versions
 * **0.6.2** [2014-06-30]

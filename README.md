@@ -16,7 +16,17 @@ The `2.0.x` is a maintenance branch for the 2.0.x series of Play! Framework (pla
 ## Features
 Sending email through an easy-to-use API and allowing for text-only, html-only and mixed emails. Preferably based on Play! templates (see sample).
 
+## Code sample
+```java
+Mailer.getDefaultMailer().sendMail("Your subject", 'Your text body', 'recipient@email.com');
+```
+You can also have a look at the [sample](samples/play-easymail-usage/app/Application.java) for a more advanced use-case (content from templates and setting custom headers).
+
 ## Versions
+* **0.6.2** [2014-06-30]
+  * Fix `addCustomHeader` method
+  * Add `sendMail` convenience method for text-only mails
+  * Add to sample: show advanced Mail example (add Reply-To header)
 * **0.6.1** [2014-06-29]
   * Add Scala 2.10.x binary to repository
   * Test against Scala 2.10.x

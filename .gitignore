@@ -16,3 +16,5 @@ samples/play-easymail-usage/project/project/target
 samples/play-easymail-usage/project/target
 code/.target
 target
+code
+samples

@@ -5,7 +5,7 @@ This plugin uses concepts from [Play20StartApp][] to make sending emails (text, 
 #### Version information
 **play-easymail currently needs Play! Framework 2.x**
 
-* The master branch contains the code for Play! Framework 2.3.x (play-easymail version `0.6.0` and up).
+* The `master` branch contains the code for Play! Framework 2.3.x (play-easymail version `0.6.0` and up).
 * The `2.2.x` branch contains the code for 2.2.x (play-easymail version `0.5 - 0.5.x`).
 * The `2.1.x` branch contains the code for 2.1.x (play-easymail version `0.2 - 0.3.x`).
 * The `2.0.x` is a maintenance branch for the 2.0.x series of Play! Framework (play-easymail version `0.1`).

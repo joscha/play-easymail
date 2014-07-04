@@ -27,6 +27,8 @@ Mailer.getDefaultMailer().sendMail(
 You can also have a look at the [sample](samples/play-easymail-usage/app/controllers/Application.java) for a more advanced use-case (content from templates and setting custom headers).
 
 ## Versions
+* **0.6.3** [2014-07-05]
+  * Added `setReplyTo` method (thanks @cornelcroi)
 * **0.6.2** [2014-06-30]
   * Fix `addCustomHeader` method
   * Add `sendMail` convenience method for text-only mails
@@ -37,9 +39,11 @@ You can also have a look at the [sample](samples/play-easymail-usage/app/control
   * ATTENTION: Binaries are not published in ivy style any more, please update your resolver URLs (see [#189](https://github.com/joscha/play-authenticate/issues/189))
 * **0.6.0** [2014-06-10]
   * Version for Play 2.3.x
+* **0.5.2** [2014-07-05]
+  * Added `setReplyTo` method (thanks @cornelcroi)
+  * Last version for Play 2.2.x
 * **0.5.1** [2014-07-01]
   * Backport fix for `addCustomHeader` method
-  * Last version for Play 2.2.x
 * **0.5** [2013-10-23]
   * First version for Play 2.2.x
 * **0.3** [2013-09-01]

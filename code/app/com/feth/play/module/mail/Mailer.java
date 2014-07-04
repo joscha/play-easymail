@@ -133,16 +133,30 @@ public class Mailer {
         private final String[] recipients;
         private String from;
         private final Body body;
+        private String replyto;
+
         private final Map<String, List<String>> customHeaders;
 
         public Mail(final String subject, final Body body,
                     final String[] recipients) {
-            this(subject, body, recipients, null);
+            this(subject, body, recipients, null, null);
         }
+
+        public Mail(final String subject, final Body body,
+                    final String[] recipients, final String replyto) {
+            this(subject, body, recipients, null, replyto);
+        }
+
 
         public Mail(final String subject, final Body body,
                     final String[] recipients,
                     final Map<String, List<String>> customHeaders) {
+            this(subject, body, recipients, customHeaders, null);
+        }
+
+        public Mail(final String subject, final Body body,
+                    final String[] recipients,
+                    final Map<String, List<String>> customHeaders, final String replyto) {
             if (subject == null || subject.trim().isEmpty()) {
                 throw new RuntimeException("Subject must not be null or empty");
             }
@@ -165,7 +179,12 @@ public class Mailer {
             } else {
                 this.customHeaders = new HashMap<String, List<String>>(1);
             }
+
+            if(replyto!=null){
+                this.replyto = replyto;
+            }
         }
+
 
         public String getSubject() {
             return subject;
@@ -181,6 +200,14 @@ public class Mailer {
 
         private void setFrom(final String from) {
             this.from = from;
+        }
+
+        public String getReplyto() {
+            return replyto;
+        }
+
+        public String setReplyto(final String replyto) {
+            this.replyto = replyto;
         }
 
         public Body getBody() {
@@ -220,7 +247,9 @@ public class Mailer {
                     api.addHeader(headerName, headerValue);
                 }
             }
-
+            if(mail.getReplyto()!=null){
+                api.setReplyTo(mail.getReplyto());
+            }
             if (mail.getBody().isBoth()) {
                 // sends both text and html
                 api.send(mail.getBody().getText(), mail.getBody().getHtml());

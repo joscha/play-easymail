@@ -133,7 +133,7 @@ public class Mailer {
         private final String[] recipients;
         private String from;
         private final Body body;
-        private String replyto;
+        private String replyTo;
 
         private final Map<String, List<String>> customHeaders;
 
@@ -156,7 +156,7 @@ public class Mailer {
 
         public Mail(final String subject, final Body body,
                     final String[] recipients,
-                    final Map<String, List<String>> customHeaders, final String replyto) {
+                    final Map<String, List<String>> customHeaders, final String replyTo) {
             if (subject == null || subject.trim().isEmpty()) {
                 throw new RuntimeException("Subject must not be null or empty");
             }
@@ -180,8 +180,8 @@ public class Mailer {
                 this.customHeaders = new HashMap<String, List<String>>(1);
             }
 
-            if(replyto!=null){
-                this.replyto = replyto;
+            if(replyTo!=null){
+                this.replyTo = replyTo;
             }
         }
 
@@ -202,12 +202,12 @@ public class Mailer {
             this.from = from;
         }
 
-        public String getReplyto() {
-            return replyto;
+        public String getReplyTo() {
+            return replyTo;
         }
 
-        public void setReplyto(final String replyto) {
-            this.replyto = replyto;
+        public void setReplyTo(final String replyTo) {
+            this.replyTo = replyTo;
         }
 
         public Body getBody() {

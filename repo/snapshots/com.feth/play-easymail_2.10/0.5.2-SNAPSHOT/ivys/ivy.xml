@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0" xmlns:e="http://ant.apache.org/ivy/extra">
-	<info organisation="com.feth" module="play-easymail_2.10" revision="0.5.2-SNAPSHOT" status="integration" publication="20140705005937">
+	<info organisation="com.feth" module="play-easymail_2.10" revision="0.5.2-SNAPSHOT" status="integration" publication="20140705013955">
 		<description>
 		play-easymail
 		</description>

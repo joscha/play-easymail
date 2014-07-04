@@ -5,7 +5,7 @@ import play.Project._
 object ApplicationBuild extends Build {
 
     val appName         = "play-easymail"
-    val libVersion      = "0.5.1-SNAPSHOT"
+    val libVersion      = "0.5.2-SNAPSHOT"
 
     val appDependencies = Seq(
         javaCore

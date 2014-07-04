@@ -206,7 +206,7 @@ public class Mailer {
             return replyto;
         }
 
-        public String setReplyto(final String replyto) {
+        public void setReplyto(final String replyto) {
             this.replyto = replyto;
         }
 

@@ -143,8 +143,8 @@ public class Mailer {
         }
 
         public Mail(final String subject, final Body body,
-                    final String[] recipients, final String replyto) {
-            this(subject, body, recipients, null, replyto);
+                    final String[] recipients, final String replyTo) {
+            this(subject, body, recipients, null, replyTo);
         }
 
 
@@ -247,8 +247,8 @@ public class Mailer {
                     api.addHeader(headerName, headerValue);
                 }
             }
-            if(mail.getReplyto()!=null){
-                api.setReplyTo(mail.getReplyto());
+            if(mail.getReplyTo()!=null){
+                api.setReplyTo(mail.getReplyTo());
             }
             if (mail.getBody().isBoth()) {
                 // sends both text and html

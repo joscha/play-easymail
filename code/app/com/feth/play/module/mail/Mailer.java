@@ -86,6 +86,24 @@ public class Mailer {
 
     public static class Mail {
 
+
+        public static class HtmlBody  extends  Body{
+
+            public HtmlBody(final String text) {
+                super(null, text);
+            }
+
+        }
+
+        public static class TxtBody  extends  Body{
+
+            public TxtBody(final String text) {
+                super(text, null);
+            }
+
+        }
+
+
         public static class Body {
             private final String html;
             private final String text;

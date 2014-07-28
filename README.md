@@ -1,4 +1,4 @@
-# play-easymail - an extension to the Typesafe mailer plugin for Play! Framework 2.x (Java)
+# [![Build Status](https://travis-ci.org/joscha/play-easymail.png?branch=master)](https://travis-ci.org/joscha/play-easymail) play-easymail - an extension to the Typesafe mailer plugin for Play! Framework 2.x (Java)
 
 This plugin uses concepts from [Play20StartApp][] to make sending emails (text, html, mixed) easier. A sample is included.
 
@@ -9,9 +9,6 @@ This plugin uses concepts from [Play20StartApp][] to make sending emails (text, 
 * The `2.2.x` branch contains the code for 2.2.x (play-easymail version `0.5 - 0.5.x`).
 * The `2.1.x` branch contains the code for 2.1.x (play-easymail version `0.2 - 0.3.x`).
 * The `2.0.x` is a maintenance branch for the 2.0.x series of Play! Framework (play-easymail version `0.1`).
-
-### Build status
-[![Build Status](https://travis-ci.org/joscha/play-easymail.png?branch=master)](https://travis-ci.org/joscha/play-easymail)
 
 ## Features
 Sending email through an easy-to-use API and allowing for text-only, html-only and mixed emails. Preferably based on Play! templates (see sample).
@@ -27,6 +24,8 @@ Mailer.getDefaultMailer().sendMail(
 You can also have a look at the [sample](samples/play-easymail-usage/app/controllers/Application.java) for a more advanced use-case (content from templates and setting custom headers).
 
 ## Versions
+* **0.6.4** [2014-07-28]
+  * Use Java 6 for releasing binaries (thanks @rui-ferreira)
 * **0.6.3** [2014-07-05]
   * Added `setReplyTo` method (thanks @cornelcroi)
 * **0.6.2** [2014-06-30]

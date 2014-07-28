@@ -5,7 +5,6 @@ scala:
 script:
   - "cd $TRAVIS_BUILD_DIR/code"
   - "sbt ++$TRAVIS_SCALA_VERSION test"
-  - "./publish.sh"
   - "sbt ++$TRAVIS_SCALA_VERSION publish-local"
   - "cd $TRAVIS_BUILD_DIR/samples/play-easymail-usage"
   - "sbt ++$TRAVIS_SCALA_VERSION test"

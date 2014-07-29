@@ -5,6 +5,8 @@ This plugin uses concepts from [Play20StartApp][] to make sending emails (text, 
 #### Version information
 **play-easymail currently needs Play! Framework 2.x**
 
+play-easymail is cross-tested with Java 1.6 and Java 1.7
+
 * The `master` branch contains the code for Play! Framework 2.3.x (play-easymail version `0.6.0` and up).
 * The `2.2.x` branch contains the code for 2.2.x (play-easymail version `0.5 - 0.5.x`).
 * The `2.1.x` branch contains the code for 2.1.x (play-easymail version `0.2 - 0.3.x`).

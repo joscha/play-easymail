@@ -148,6 +148,8 @@ public class Mailer {
 
         private final String subject;
         private final String[] recipients;
+        private final String[] cc;
+        private final String[] bcc;
         private String from;
         private final Body body;
         private String replyTo;
@@ -156,23 +158,54 @@ public class Mailer {
 
         public Mail(final String subject, final Body body,
                     final String[] recipients) {
-            this(subject, body, recipients, null, null);
+            this(subject, body, recipients, null, null, null, null);
+        }
+
+        public Mail(final String subject, final Body body,
+                final String[] recipients, final String[] cc) {
+            this(subject, body, recipients, cc, null, null, null);
+        }
+
+        public Mail(final String subject, final Body body,
+                final String[] recipients, final String[] cc, final String[] bcc) {
+            this(subject, body, recipients, cc, bcc, null, null);
         }
 
         public Mail(final String subject, final Body body,
                     final String[] recipients, final String replyTo) {
-            this(subject, body, recipients, null, replyTo);
+            this(subject, body, recipients, null, null, null, replyTo);
         }
 
+        public Mail(final String subject, final Body body,
+                    final String[] recipients, final String[] cc, final String replyTo) {
+            this(subject, body, recipients, cc, null, null, replyTo);
+        }
+
+        public Mail(final String subject, final Body body,
+                final String[] recipients, final String[] cc, final String[] bcc, final String replyTo) {
+            this(subject, body, recipients, cc, bcc, null, replyTo);
+        }
 
         public Mail(final String subject, final Body body,
                     final String[] recipients,
                     final Map<String, List<String>> customHeaders) {
-            this(subject, body, recipients, customHeaders, null);
+            this(subject, body, recipients, null, null, customHeaders, null);
         }
 
         public Mail(final String subject, final Body body,
-                    final String[] recipients,
+                final String[] recipients, final String[] cc,
+                final Map<String, List<String>> customHeaders) {
+            this(subject, body, recipients, cc, null, customHeaders, null);
+        }
+
+        public Mail(final String subject, final Body body,
+                final String[] recipients, final String[] cc, final String[] bcc,
+                final Map<String, List<String>> customHeaders) {
+            this(subject, body, recipients, cc, bcc, customHeaders, null);
+        }
+
+        public Mail(final String subject, final Body body,
+                    final String[] recipients, final String[] cc, final String[] bcc,
                     final Map<String, List<String>> customHeaders, final String replyTo) {
             if (subject == null || subject.trim().isEmpty()) {
                 throw new RuntimeException("Subject must not be null or empty");
@@ -190,6 +223,9 @@ public class Mailer {
                         "There must be at least one recipient");
             }
             this.recipients = recipients;
+
+            this.cc = cc;
+            this.bcc = bcc;
 
             if (customHeaders != null) {
                 this.customHeaders = customHeaders;
@@ -209,6 +245,14 @@ public class Mailer {
 
         public String[] getRecipients() {
             return recipients;
+        }
+
+        public String[] getCc() {
+            return cc;
+        }
+
+        public String[] getBcc() {
+            return bcc;
         }
 
         public String getFrom() {
@@ -254,6 +298,12 @@ public class Mailer {
 
             api.setSubject(mail.getSubject());
             api.setRecipient(mail.getRecipients());
+            if(mail.getCc() != null) {
+                api.setCc(mail.getCc());
+            }
+            if(mail.getBcc() != null) {
+                api.setBcc(mail.getBcc());
+            }
             api.setFrom(mail.getFrom());
             api.addHeader("X-Mailer", MAILER + getVersion());
 

@@ -13,7 +13,7 @@ javacOptions ++= {
   else                                        Seq()
 }
 
-version := "0.6.4-SNAPSHOT"
+version := "0.6.5-SNAPSHOT"
 
 publishTo <<= (version) { version: String =>
   if (version.trim.endsWith("SNAPSHOT")) Some(Resolver.file("file",  new File( "../repo/snapshots" )))

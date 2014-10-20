@@ -23,6 +23,7 @@ public class Mailer {
         public static final String FROM = "from";
         public static final String FROM_EMAIL = "email";
         public static final String FROM_NAME = "name";
+        public static final String INCLUDE_XMAILER_HEADER = "includeXMailerHeader";
         public static final String DELAY = "delay";
         private static final String VERSION = "version";
     }
@@ -32,6 +33,8 @@ public class Mailer {
     private final FiniteDuration delay;
 
     private final String sender;
+
+    private final boolean includeXMailerHeader;
 
     private static Mailer instance = null;
 
@@ -82,6 +85,8 @@ public class Mailer {
         final Configuration fromConfig = config.getConfig(SettingKeys.FROM);
         sender = getEmailName(fromConfig.getString(SettingKeys.FROM_EMAIL),
                 fromConfig.getString(SettingKeys.FROM_NAME));
+
+        includeXMailerHeader = config.getBoolean(SettingKeys.INCLUDE_XMAILER_HEADER, true);
     }
 
     public static class Mail {
@@ -255,7 +260,9 @@ public class Mailer {
             api.setSubject(mail.getSubject());
             api.setRecipient(mail.getRecipients());
             api.setFrom(mail.getFrom());
-            api.addHeader("X-Mailer", MAILER + getVersion());
+            if(includeXMailerHeader) {
+                api.addHeader("X-Mailer", MAILER + getVersion());
+            }
 
             for (final Entry<String, List<String>> entry : mail
                     .getCustomHeaders().entrySet()) {

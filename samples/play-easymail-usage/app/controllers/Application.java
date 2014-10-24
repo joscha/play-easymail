@@ -1,7 +1,12 @@
 package controllers;
 
 import com.feth.play.module.mail.Mailer;
+import com.feth.play.module.mail.Mailer.Mail.Attachment;
 import com.feth.play.module.mail.Mailer.Mail.Body;
+
+import java.io.File;
+
+import org.apache.commons.mail.EmailAttachment;
 
 import play.data.Form;
 import play.data.validation.Constraints.Email;
@@ -47,6 +52,9 @@ public class Application extends Controller {
                 // advanced usage
                 final Mailer.Mail customMail = new Mailer.Mail("play-easymail | advanced", body, new String[]{ email });
                 customMail.addCustomHeader("Reply-To", email);
+                customMail.addAttachment(new Attachment("attachment.pdf", new File("/some/path/attachment.pdf")));
+                byte[] data = "data".getBytes();
+                customMail.addAttachment(new Attachment("data.txt", data, "text/plain", "A simple file", EmailAttachment.INLINE));
                 defaultMailer.sendMail(customMail);
             }
 

@@ -9,6 +9,7 @@ import play.libs.Akka;
 import scala.concurrent.duration.Duration;
 import scala.concurrent.duration.FiniteDuration;
 
+import java.io.File;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
@@ -151,6 +152,82 @@ public class Mailer {
             }
         }
 
+        public static class Attachment {
+            private byte[] data;
+            private String mimetype;
+            private File file;
+            private String name;
+            private String description;
+            private String disposition;
+
+            public Attachment(String name, byte[] data, String mimetype) {
+                this(name, data, mimetype, null);
+            }
+
+            public Attachment(String name, byte[] data, String mimetype, String description) {
+                this(name, data, mimetype, description, null);
+            }
+
+            public Attachment(String name, byte[] data, String mimetype, String description, String disposition) {
+                if (name == null || name.trim().isEmpty()) {
+                    throw new RuntimeException("Name must not be null or empty");
+                }
+                if (data == null) {
+                    throw new RuntimeException("Data must not be null");
+                }
+                this.name = name;
+                this.data = data;
+                this.mimetype = mimetype;
+                this.description = description;
+                this.disposition = disposition;
+            }
+
+            public Attachment(String name, File file) {
+                this(name, file, null);
+            }
+
+            public Attachment(String name, File file, String description) {
+                this(name, file, description, null);
+            }
+
+            public Attachment(String name, File file, String description, String disposition) {
+                if (name == null || name.trim().isEmpty()) {
+                    throw new RuntimeException("Name must not be null or empty");
+                }
+                if (file == null) {
+                    throw new RuntimeException("File must not be null");
+                }
+                this.name = name;
+                this.file = file;
+                this.description = description;
+                this.disposition = disposition;
+            }
+
+            public byte[] getData() {
+                return this.data;
+            }
+
+            public String getMimetype() {
+                return this.mimetype;
+            }
+
+            public File getFile() {
+                return this.file;
+            }
+
+            public String getName() {
+                return this.name;
+            }
+
+            public String getDescription() {
+                return this.description;
+            }
+
+            public String getDisposition() {
+                return this.disposition;
+            }
+        }
+
         private final String subject;
         private final String[] recipients;
         private final String[] cc;
@@ -160,6 +237,7 @@ public class Mailer {
         private String replyTo;
 
         private final Map<String, List<String>> customHeaders;
+        private final List<Attachment> attachments = new ArrayList<Attachment>();
 
         public Mail(final String subject, final Body body,
                     final String[] recipients) {
@@ -287,6 +365,14 @@ public class Mailer {
         public void addCustomHeader(String name, String... values) {
             this.customHeaders.put(name, Arrays.asList(values));
         }
+
+        public List<Attachment> getAttachments() {
+            return attachments;
+        }
+
+        public void addAttachment(Attachment... attachments) {
+            this.attachments.addAll(Arrays.asList(attachments));
+        }
     }
 
     private class MailJob implements Runnable {
@@ -323,6 +409,13 @@ public class Mailer {
             }
             if(mail.getReplyTo()!=null){
                 api.setReplyTo(mail.getReplyTo());
+            }
+            for (final Mail.Attachment attachment : mail.getAttachments()) {
+                if(attachment.getData() != null) {
+                    api.addAttachment(attachment.getName(), attachment.getData(), attachment.getMimetype(), attachment.getDescription(), attachment.getDisposition());
+                } else {
+                    api.addAttachment(attachment.getName(), attachment.getFile(), attachment.getDescription(), attachment.getDisposition());
+                }
             }
             if (mail.getBody().isBoth()) {
                 // sends both text and html

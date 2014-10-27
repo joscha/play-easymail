@@ -21,7 +21,7 @@ publishTo <<= (version) { version: String =>
 }
 
 libraryDependencies ++= Seq(
-  "com.typesafe.play.plugins" %% "play-plugins-mailer" % "2.3.0"
+  "com.typesafe.play.plugins" %% "play-plugins-mailer" % "2.3.1"
 )
 
 publishArtifact in packageDoc := false

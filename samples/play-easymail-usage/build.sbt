@@ -2,7 +2,7 @@ import play.PlayJava
 
 name := "play-easymail-usage"
 
-scalaVersion := "2.11.1"
+scalaVersion := "2.11.2"
 
 version := "1.0-SNAPSHOT"
 

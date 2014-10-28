@@ -22,7 +22,6 @@ resolvers ++= Seq(
 
 lazy val root = (project in file("."))
   .enablePlugins(PlayJava)
-
-//  Uncomment the next lines for local development of the Play Authenticate core:
+/*  Uncomment the next lines for local development of the Play Authenticate core: */
 //  .dependsOn(playEasymail)
 //  .aggregate(playEasymail)

@@ -26,6 +26,9 @@ Mailer.getDefaultMailer().sendMail(
 You can also have a look at the [sample](samples/play-easymail-usage/app/controllers/Application.java) for a more advanced use-case (content from templates and setting custom headers).
 
 ## Versions
+* **0.6.6** [2014-10-28]
+  * Fix delay setting location (thanks @mkurz)
+  * Attachment support (thanks @mkurz)
 * **0.6.5** [2014-10-20]
   * Allow disabling X-Mailer header (thanks @mkurz)
   * Allow setting CC and BCC (thanks @mkurz)

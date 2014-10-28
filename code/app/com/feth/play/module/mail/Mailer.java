@@ -9,6 +9,7 @@ import play.libs.Akka;
 import scala.concurrent.duration.Duration;
 import scala.concurrent.duration.FiniteDuration;
 
+import java.io.File;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
@@ -92,7 +93,7 @@ public class Mailer {
     public static class Mail {
 
 
-        public static class HtmlBody  extends  Body{
+        public static class HtmlBody extends Body {
 
             public HtmlBody(final String text) {
                 super(null, text);
@@ -100,7 +101,7 @@ public class Mailer {
 
         }
 
-        public static class TxtBody  extends  Body{
+        public static class TxtBody extends Body {
 
             public TxtBody(final String text) {
                 super(text, null);
@@ -151,6 +152,82 @@ public class Mailer {
             }
         }
 
+        public static class Attachment {
+            private byte[] data;
+            private String mimeType;
+            private File file;
+            private String name;
+            private String description;
+            private String disposition;
+
+            public Attachment(final String name, final byte[] data, final String mimeType) {
+                this(name, data, mimeType, null);
+            }
+
+            public Attachment(final String name, final byte[] data, final String mimeType, final String description) {
+                this(name, data, mimeType, description, null);
+            }
+
+            public Attachment(final String name, final byte[] data, final String mimeType, final String description, final String disposition) {
+                if (name == null || name.trim().isEmpty()) {
+                    throw new RuntimeException("Name must not be null or empty");
+                }
+                if (data == null) {
+                    throw new RuntimeException("Data must not be null");
+                }
+                this.name = name;
+                this.data = data;
+                this.mimeType = mimeType;
+                this.description = description;
+                this.disposition = disposition;
+            }
+
+            public Attachment(final String name, final File file) {
+                this(name, file, null);
+            }
+
+            public Attachment(final String name, final File file, String description) {
+                this(name, file, description, null);
+            }
+
+            public Attachment(final String name, final File file, final String description, final String disposition) {
+                if (name == null || name.trim().isEmpty()) {
+                    throw new RuntimeException("Name must not be null or empty");
+                }
+                if (file == null) {
+                    throw new RuntimeException("File must not be null");
+                }
+                this.name = name;
+                this.file = file;
+                this.description = description;
+                this.disposition = disposition;
+            }
+
+            public byte[] getData() {
+                return this.data;
+            }
+
+            public String getMimeType() {
+                return this.mimeType;
+            }
+
+            public File getFile() {
+                return this.file;
+            }
+
+            public String getName() {
+                return this.name;
+            }
+
+            public String getDescription() {
+                return this.description;
+            }
+
+            public String getDisposition() {
+                return this.disposition;
+            }
+        }
+
         private final String subject;
         private final String[] recipients;
         private final String[] cc;
@@ -160,6 +237,7 @@ public class Mailer {
         private String replyTo;
 
         private final Map<String, List<String>> customHeaders;
+        private final List<Attachment> attachments = new ArrayList<Attachment>(1);
 
         public Mail(final String subject, final Body body,
                     final String[] recipients) {
@@ -167,12 +245,12 @@ public class Mailer {
         }
 
         public Mail(final String subject, final Body body,
-                final String[] recipients, final String[] cc) {
+                    final String[] recipients, final String[] cc) {
             this(subject, body, recipients, cc, null, null, null);
         }
 
         public Mail(final String subject, final Body body,
-                final String[] recipients, final String[] cc, final String[] bcc) {
+                    final String[] recipients, final String[] cc, final String[] bcc) {
             this(subject, body, recipients, cc, bcc, null, null);
         }
 
@@ -187,7 +265,7 @@ public class Mailer {
         }
 
         public Mail(final String subject, final Body body,
-                final String[] recipients, final String[] cc, final String[] bcc, final String replyTo) {
+                    final String[] recipients, final String[] cc, final String[] bcc, final String replyTo) {
             this(subject, body, recipients, cc, bcc, null, replyTo);
         }
 
@@ -198,14 +276,14 @@ public class Mailer {
         }
 
         public Mail(final String subject, final Body body,
-                final String[] recipients, final String[] cc,
-                final Map<String, List<String>> customHeaders) {
+                    final String[] recipients, final String[] cc,
+                    final Map<String, List<String>> customHeaders) {
             this(subject, body, recipients, cc, null, customHeaders, null);
         }
 
         public Mail(final String subject, final Body body,
-                final String[] recipients, final String[] cc, final String[] bcc,
-                final Map<String, List<String>> customHeaders) {
+                    final String[] recipients, final String[] cc, final String[] bcc,
+                    final Map<String, List<String>> customHeaders) {
             this(subject, body, recipients, cc, bcc, customHeaders, null);
         }
 
@@ -238,7 +316,7 @@ public class Mailer {
                 this.customHeaders = new HashMap<String, List<String>>(1);
             }
 
-            if(replyTo!=null){
+            if (replyTo != null) {
                 this.replyTo = replyTo;
             }
         }
@@ -287,6 +365,14 @@ public class Mailer {
         public void addCustomHeader(String name, String... values) {
             this.customHeaders.put(name, Arrays.asList(values));
         }
+
+        public List<Attachment> getAttachments() {
+            return attachments;
+        }
+
+        public void addAttachment(final Attachment... attachments) {
+            this.attachments.addAll(Arrays.asList(attachments));
+        }
     }
 
     private class MailJob implements Runnable {
@@ -303,14 +389,14 @@ public class Mailer {
 
             api.setSubject(mail.getSubject());
             api.setRecipient(mail.getRecipients());
-            if(mail.getCc() != null) {
+            if (mail.getCc() != null) {
                 api.setCc(mail.getCc());
             }
-            if(mail.getBcc() != null) {
+            if (mail.getBcc() != null) {
                 api.setBcc(mail.getBcc());
             }
             api.setFrom(mail.getFrom());
-            if(includeXMailerHeader) {
+            if (includeXMailerHeader) {
                 api.addHeader("X-Mailer", MAILER + getVersion());
             }
 
@@ -321,8 +407,15 @@ public class Mailer {
                     api.addHeader(headerName, headerValue);
                 }
             }
-            if(mail.getReplyTo()!=null){
+            if (mail.getReplyTo() != null) {
                 api.setReplyTo(mail.getReplyTo());
+            }
+            for (final Mail.Attachment attachment : mail.getAttachments()) {
+                if (attachment.getData() != null) {
+                    api.addAttachment(attachment.getName(), attachment.getData(), attachment.getMimeType(), attachment.getDescription(), attachment.getDisposition());
+                } else {
+                    api.addAttachment(attachment.getName(), attachment.getFile(), attachment.getDescription(), attachment.getDisposition());
+                }
             }
             if (mail.getBody().isBoth()) {
                 // sends both text and html

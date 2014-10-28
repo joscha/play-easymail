@@ -93,7 +93,7 @@ public class Mailer {
     public static class Mail {
 
 
-        public static class HtmlBody  extends  Body{
+        public static class HtmlBody extends Body {
 
             public HtmlBody(final String text) {
                 super(null, text);
@@ -101,7 +101,7 @@ public class Mailer {
 
         }
 
-        public static class TxtBody  extends  Body{
+        public static class TxtBody extends Body {
 
             public TxtBody(final String text) {
                 super(text, null);
@@ -154,21 +154,21 @@ public class Mailer {
 
         public static class Attachment {
             private byte[] data;
-            private String mimetype;
+            private String mimeType;
             private File file;
             private String name;
             private String description;
             private String disposition;
 
-            public Attachment(String name, byte[] data, String mimetype) {
-                this(name, data, mimetype, null);
+            public Attachment(final String name, final byte[] data, final String mimeType) {
+                this(name, data, mimeType, null);
             }
 
-            public Attachment(String name, byte[] data, String mimetype, String description) {
-                this(name, data, mimetype, description, null);
+            public Attachment(final String name, final byte[] data, final String mimeType, final String description) {
+                this(name, data, mimeType, description, null);
             }
 
-            public Attachment(String name, byte[] data, String mimetype, String description, String disposition) {
+            public Attachment(final String name, final byte[] data, final String mimeType, final String description, final String disposition) {
                 if (name == null || name.trim().isEmpty()) {
                     throw new RuntimeException("Name must not be null or empty");
                 }
@@ -177,20 +177,20 @@ public class Mailer {
                 }
                 this.name = name;
                 this.data = data;
-                this.mimetype = mimetype;
+                this.mimeType = mimeType;
                 this.description = description;
                 this.disposition = disposition;
             }
 
-            public Attachment(String name, File file) {
+            public Attachment(final String name, final File file) {
                 this(name, file, null);
             }
 
-            public Attachment(String name, File file, String description) {
+            public Attachment(final String name, final File file, String description) {
                 this(name, file, description, null);
             }
 
-            public Attachment(String name, File file, String description, String disposition) {
+            public Attachment(final String name, final File file, final String description, final String disposition) {
                 if (name == null || name.trim().isEmpty()) {
                     throw new RuntimeException("Name must not be null or empty");
                 }
@@ -207,8 +207,8 @@ public class Mailer {
                 return this.data;
             }
 
-            public String getMimetype() {
-                return this.mimetype;
+            public String getMimeType() {
+                return this.mimeType;
             }
 
             public File getFile() {
@@ -237,7 +237,7 @@ public class Mailer {
         private String replyTo;
 
         private final Map<String, List<String>> customHeaders;
-        private final List<Attachment> attachments = new ArrayList<Attachment>();
+        private final List<Attachment> attachments = new ArrayList<Attachment>(1);
 
         public Mail(final String subject, final Body body,
                     final String[] recipients) {
@@ -245,12 +245,12 @@ public class Mailer {
         }
 
         public Mail(final String subject, final Body body,
-                final String[] recipients, final String[] cc) {
+                    final String[] recipients, final String[] cc) {
             this(subject, body, recipients, cc, null, null, null);
         }
 
         public Mail(final String subject, final Body body,
-                final String[] recipients, final String[] cc, final String[] bcc) {
+                    final String[] recipients, final String[] cc, final String[] bcc) {
             this(subject, body, recipients, cc, bcc, null, null);
         }
 
@@ -265,7 +265,7 @@ public class Mailer {
         }
 
         public Mail(final String subject, final Body body,
-                final String[] recipients, final String[] cc, final String[] bcc, final String replyTo) {
+                    final String[] recipients, final String[] cc, final String[] bcc, final String replyTo) {
             this(subject, body, recipients, cc, bcc, null, replyTo);
         }
 
@@ -276,14 +276,14 @@ public class Mailer {
         }
 
         public Mail(final String subject, final Body body,
-                final String[] recipients, final String[] cc,
-                final Map<String, List<String>> customHeaders) {
+                    final String[] recipients, final String[] cc,
+                    final Map<String, List<String>> customHeaders) {
             this(subject, body, recipients, cc, null, customHeaders, null);
         }
 
         public Mail(final String subject, final Body body,
-                final String[] recipients, final String[] cc, final String[] bcc,
-                final Map<String, List<String>> customHeaders) {
+                    final String[] recipients, final String[] cc, final String[] bcc,
+                    final Map<String, List<String>> customHeaders) {
             this(subject, body, recipients, cc, bcc, customHeaders, null);
         }
 
@@ -316,7 +316,7 @@ public class Mailer {
                 this.customHeaders = new HashMap<String, List<String>>(1);
             }
 
-            if(replyTo!=null){
+            if (replyTo != null) {
                 this.replyTo = replyTo;
             }
         }
@@ -370,7 +370,7 @@ public class Mailer {
             return attachments;
         }
 
-        public void addAttachment(Attachment... attachments) {
+        public void addAttachment(final Attachment... attachments) {
             this.attachments.addAll(Arrays.asList(attachments));
         }
     }
@@ -389,14 +389,14 @@ public class Mailer {
 
             api.setSubject(mail.getSubject());
             api.setRecipient(mail.getRecipients());
-            if(mail.getCc() != null) {
+            if (mail.getCc() != null) {
                 api.setCc(mail.getCc());
             }
-            if(mail.getBcc() != null) {
+            if (mail.getBcc() != null) {
                 api.setBcc(mail.getBcc());
             }
             api.setFrom(mail.getFrom());
-            if(includeXMailerHeader) {
+            if (includeXMailerHeader) {
                 api.addHeader("X-Mailer", MAILER + getVersion());
             }
 
@@ -407,12 +407,12 @@ public class Mailer {
                     api.addHeader(headerName, headerValue);
                 }
             }
-            if(mail.getReplyTo()!=null){
+            if (mail.getReplyTo() != null) {
                 api.setReplyTo(mail.getReplyTo());
             }
             for (final Mail.Attachment attachment : mail.getAttachments()) {
-                if(attachment.getData() != null) {
-                    api.addAttachment(attachment.getName(), attachment.getData(), attachment.getMimetype(), attachment.getDescription(), attachment.getDisposition());
+                if (attachment.getData() != null) {
+                    api.addAttachment(attachment.getName(), attachment.getData(), attachment.getMimeType(), attachment.getDescription(), attachment.getDisposition());
                 } else {
                     api.addAttachment(attachment.getName(), attachment.getFile(), attachment.getDescription(), attachment.getDisposition());
                 }

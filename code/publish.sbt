@@ -13,6 +13,8 @@ publishTo := {
     Some("releases"  at nexus + "service/local/staging/deploy/maven2")
 }
 
+homepage := Some(url("https://github.com/joscha/play-easymail/"))
+
 publishArtifact in Test := false
 
 pomIncludeRepository := { _ => false }

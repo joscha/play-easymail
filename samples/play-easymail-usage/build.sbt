@@ -8,7 +8,7 @@ version := "1.0-SNAPSHOT"
 
 libraryDependencies ++= Seq(
   // Comment the next line for local development:
-  "com.feth" %% "play-easymail" % "0.6.6-SNAPSHOT",
+  "com.feth" %% "play-easymail" % "0.6.6",
   javaCore
 )
 

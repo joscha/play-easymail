@@ -21,4 +21,4 @@ env:
     # SONATYPE_PASSWORD
     secure: "i8VBhY3DtsfekPRQyHaigvldy7+rdqMgXRCMxnaKh5+U1JEF1j/6oilGhPZulWUE446uXJ3yIFOhkKhJuDdJUkX5uGmlPI71pW44sy910ns2yyeiNRp19tlLNlKteiR4Y5yZ8C59yIyRoGIHxEmNWdMXxTl30pGp5SS1CrfajKY="
 after_success:
-  - "[[ $TRAVIS_BRANCH == \"master\" && $TRAVIS_JDK_VERSION == \"openjdk6\" ]] && { cd $TRAVIS_BUILD_DIR/code && sbt --warn ++$TRAVIS_SCALA_VERSION -Dtravis=1 publish; };"
+  - "[[ $TRAVIS_BRANCH == \"master\" && $TRAVIS_JDK_VERSION == \"openjdk6\" ]] && { cd $TRAVIS_BUILD_DIR/code && sbt --info ++$TRAVIS_SCALA_VERSION -Dtravis=1 publish; };"

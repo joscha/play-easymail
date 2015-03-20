@@ -1,7 +1,7 @@
 package controllers;
 
 import com.feth.play.module.mail.Mailer;
-import com.feth.play.module.mail.Mailer.Mail.Attachment;
+import com.feth.play.module.mail.Mailer.Mail;
 import com.feth.play.module.mail.Mailer.Mail.Body;
 
 import java.io.File;
@@ -11,11 +11,10 @@ import org.apache.commons.mail.EmailAttachment;
 import play.data.Form;
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
+import play.libs.mailer.MailerPlugin;
 import play.mvc.*;
 import play.Play;
-
 import views.html.index;
-
 import static play.data.Form.form;
 
 public class Application extends Controller {
@@ -24,6 +23,15 @@ public class Application extends Controller {
         @Email
         @Required
         public String email;
+
+		public String getEmail() {
+			return email;
+		}
+
+		public void setEmail(String email) {
+			this.email = email;
+		}
+        
     }
 
     private static final Form<MailMe> FORM = form(MailMe.class);
@@ -51,11 +59,11 @@ public class Application extends Controller {
 
             {
                 // advanced usage
-                final Mailer.Mail customMail = new Mailer.Mail("play-easymail | advanced", body, new String[]{ email });
-                customMail.addCustomHeader("Reply-To", email);
-                customMail.addAttachment(new Attachment("attachment.pdf", Play.application().getFile("conf/sample.pdf")));
+                final Mail customMail = new Mail("play-easymail | advanced", body, new String[]{ email });
+                customMail.addHeader("Reply-To", email);
+                customMail.addAttachment("attachment.pdf", Play.application().getFile("conf/sample.pdf"));
                 byte[] data = "data".getBytes();
-                customMail.addAttachment(new Attachment("data.txt", data, "text/plain", "A simple file", EmailAttachment.INLINE));
+                customMail.addAttachment("data.txt", data, "text/plain", "A simple file", EmailAttachment.INLINE);
                 defaultMailer.sendMail(customMail);
             }
 

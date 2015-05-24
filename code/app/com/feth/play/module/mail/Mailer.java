@@ -2,8 +2,8 @@ package com.feth.play.module.mail;
 
 import akka.actor.Cancellable;
 import com.feth.play.module.mail.Mailer.Mail.Body;
-import com.typesafe.plugin.MailerAPI;
-import com.typesafe.plugin.MailerPlugin;
+import play.libs.mailer.Email;
+import play.libs.mailer.MailerPlugin;
 import play.Configuration;
 import play.libs.Akka;
 import scala.concurrent.duration.Duration;
@@ -28,8 +28,6 @@ public class Mailer {
         public static final String DELAY = "delay";
         private static final String VERSION = "version";
     }
-
-    private final MailerPlugin plugin;
 
     private final FiniteDuration delay;
 
@@ -80,7 +78,6 @@ public class Mailer {
     }
 
     protected Mailer(final Configuration config) {
-        plugin = play.Play.application().plugin(MailerPlugin.class);
         delay = Duration.create(config.getLong(SettingKeys.DELAY, 1L), TimeUnit.SECONDS);
 
         final Configuration fromConfig = config.getConfig(SettingKeys.FROM);
@@ -385,49 +382,51 @@ public class Mailer {
 
         @Override
         public void run() {
-            final MailerAPI api = plugin.email();
+            final Email email = new Email();
 
-            api.setSubject(mail.getSubject());
-            api.setRecipient(mail.getRecipients());
+            email.setSubject(mail.getSubject());
+            email.setTo(Arrays.asList(mail.getRecipients()));
             if (mail.getCc() != null) {
-                api.setCc(mail.getCc());
+                email.setCc(Arrays.asList(mail.getCc()));
             }
             if (mail.getBcc() != null) {
-                api.setBcc(mail.getBcc());
+                email.setBcc(Arrays.asList(mail.getBcc()));
             }
-            api.setFrom(mail.getFrom());
+            email.setFrom(mail.getFrom());
             if (includeXMailerHeader) {
-                api.addHeader("X-Mailer", MAILER + getVersion());
+                email.addHeader("X-Mailer", MAILER + getVersion());
             }
 
             for (final Entry<String, List<String>> entry : mail
                     .getCustomHeaders().entrySet()) {
                 final String headerName = entry.getKey();
                 for (final String headerValue : entry.getValue()) {
-                    api.addHeader(headerName, headerValue);
+                    email.addHeader(headerName, headerValue);
                 }
             }
             if (mail.getReplyTo() != null) {
-                api.setReplyTo(mail.getReplyTo());
+                email.setReplyTo(mail.getReplyTo());
             }
             for (final Mail.Attachment attachment : mail.getAttachments()) {
                 if (attachment.getData() != null) {
-                    api.addAttachment(attachment.getName(), attachment.getData(), attachment.getMimeType(), attachment.getDescription(), attachment.getDisposition());
+                    email.addAttachment(attachment.getName(), attachment.getData(), attachment.getMimeType(), attachment.getDescription(), attachment.getDisposition());
                 } else {
-                    api.addAttachment(attachment.getName(), attachment.getFile(), attachment.getDescription(), attachment.getDisposition());
+                    email.addAttachment(attachment.getName(), attachment.getFile(), attachment.getDescription(), attachment.getDisposition());
                 }
             }
             if (mail.getBody().isBoth()) {
                 // sends both text and html
-                api.send(mail.getBody().getText(), mail.getBody().getHtml());
+                email.setBodyText(mail.getBody().getText());
+                email.setBodyHtml(mail.getBody().getHtml());
             } else if (mail.getBody().isText()) {
                 // sends text/text
-                api.send(mail.getBody().getText());
+            	email.setBodyText(mail.getBody().getText());
             } else {
                 // if(mail.isHtml())
                 // sends html
-                api.sendHtml(mail.getBody().getHtml());
+                email.setBodyHtml(mail.getBody().getHtml());
             }
+            MailerPlugin.send(email);
         }
 
     }

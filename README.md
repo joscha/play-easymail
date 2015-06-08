@@ -27,10 +27,9 @@ Mailer.getDefaultMailer().sendMail(
 You can also have a look at the [sample](samples/play-easymail-usage/app/controllers/Application.java) for a more advanced use-case (content from templates and setting custom headers).
 
 ## Versions
-* **0.7.0** [2014-10-28]
-  * Support for play 2.4.x
-  * Use of @Inject
-  * Use of new play-mailer-3.0.0
+* **0.7.0** [2015-06-09]
+  * Support for play 2.4.x (thanks @vmouta)
+  * Use of new play-mailer-3.x (thanks @vmouta)
 * **0.6.6** [2014-10-28]
   * Fix delay setting location (thanks @mkurz)
   * Attachment support (thanks @mkurz)

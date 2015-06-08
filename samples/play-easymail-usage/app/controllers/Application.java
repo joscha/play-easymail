@@ -11,7 +11,6 @@ import org.apache.commons.mail.EmailAttachment;
 import play.data.Form;
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
-import play.libs.mailer.MailerPlugin;
 import play.mvc.*;
 import play.Play;
 import views.html.index;
@@ -22,16 +21,16 @@ public class Application extends Controller {
     public static class MailMe {
         @Email
         @Required
-        public String email;
+        private String email;
 
-		public String getEmail() {
-			return email;
-		}
+        public String getEmail() {
+            return this.email;
+        }
 
-		public void setEmail(String email) {
-			this.email = email;
-		}
-        
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
     }
 
     private static final Form<MailMe> FORM = form(MailMe.class);

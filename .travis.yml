@@ -15,8 +15,8 @@ notifications:
 env:
   global:
     # SONATYPE_USERNAME
-    secure: QcHbTh7GsQ2K6B8u8ZaDxOW5ZWYjsFheRwNjZMZ3N2hLGGjLCqYYrVqBiZudt5yRCksSk5ZpLOlAKh+P+MhxmW/KfndjI8CloTQj4kVTa2ET+kQJvguxS8QCIPEEtVjfPMSHuF+Q7TyADs7a1P7Z+58UJfSeEL/otVNrC7OUWvk=
+    secure: "QcHbTh7GsQ2K6B8u8ZaDxOW5ZWYjsFheRwNjZMZ3N2hLGGjLCqYYrVqBiZudt5yRCksSk5ZpLOlAKh+P+MhxmW/KfndjI8CloTQj4kVTa2ET+kQJvguxS8QCIPEEtVjfPMSHuF+Q7TyADs7a1P7Z+58UJfSeEL/otVNrC7OUWvk="
     # SONATYPE_PASSWORD
     secure: "i8VBhY3DtsfekPRQyHaigvldy7+rdqMgXRCMxnaKh5+U1JEF1j/6oilGhPZulWUE446uXJ3yIFOhkKhJuDdJUkX5uGmlPI71pW44sy910ns2yyeiNRp19tlLNlKteiR4Y5yZ8C59yIyRoGIHxEmNWdMXxTl30pGp5SS1CrfajKY="
 after_success:
-  - "[[ $TRAVIS_BRANCH == \"master\" && $TRAVIS_JDK_VERSION == \"oraclejdk8\" ]] && { cd $TRAVIS_BUILD_DIR/code && sbt --info ++$TRAVIS_SCALA_VERSION -Dtravis=1 publish; };"
+  - "[[ $TRAVIS_BRANCH == \"master\" ]] && { cd $TRAVIS_BUILD_DIR/code && sbt --info ++$TRAVIS_SCALA_VERSION -Dtravis=1 publish; };"

@@ -5,7 +5,7 @@ This plugin uses concepts from [Play20StartApp][] to make sending emails (text, 
 #### Version information
 **play-easymail currently needs Play! Framework 2.x**
 
-play-easymail is cross-tested with Java 1.6, Java 1.7 and Java 1.8
+play-easymail is cross-tested with Java 1.6, Java 1.7 (Up to `0.6.x`) and Java 1.8 (from `0.7.0`)
 
 * The `master` branch contains the code for Play! Framework 2.4.x (play-easymail version `0.7.0` and up).
 * The `2.3.x` branch contains the code for 2.3.x (play-easymail version `0.6 - 0.6.x`).
@@ -28,8 +28,9 @@ You can also have a look at the [sample](samples/play-easymail-usage/app/control
 
 ## Versions
 * **0.7.0** [2015-06-09]
-  * Support for play 2.4.x (thanks @vmouta)
-  * Use of new play-mailer-3.x (thanks @vmouta)
+  * Support for play 2.4.x (thanks @vmouta, @mkurz)
+  * Use of new play-mailer-3.x (thanks @vmouta, @mkurz)
+  * ATTENTION: This is for Play 2.4 - if you have Play 2.3 or older, use a `0.6.x` version.
 * **0.6.6** [2014-10-28]
   * Fix delay setting location (thanks @mkurz)
   * Attachment support (thanks @mkurz)
@@ -66,7 +67,7 @@ You can also have a look at the [sample](samples/play-easymail-usage/app/control
 
 ## License
 
-Copyright (c) 2012-2014 Joscha Feth
+Copyright (c) 2012-2015 Joscha Feth
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License. You may obtain a copy of the License in the LICENSE file, or at:
 

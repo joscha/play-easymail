@@ -14,9 +14,7 @@ notifications:
   email: false
 env:
   global:
-    # SONATYPE_USERNAME
-    secure: QcHbTh7GsQ2K6B8u8ZaDxOW5ZWYjsFheRwNjZMZ3N2hLGGjLCqYYrVqBiZudt5yRCksSk5ZpLOlAKh+P+MhxmW/KfndjI8CloTQj4kVTa2ET+kQJvguxS8QCIPEEtVjfPMSHuF+Q7TyADs7a1P7Z+58UJfSeEL/otVNrC7OUWvk=
-    # SONATYPE_PASSWORD
-    secure: "i8VBhY3DtsfekPRQyHaigvldy7+rdqMgXRCMxnaKh5+U1JEF1j/6oilGhPZulWUE446uXJ3yIFOhkKhJuDdJUkX5uGmlPI71pW44sy910ns2yyeiNRp19tlLNlKteiR4Y5yZ8C59yIyRoGIHxEmNWdMXxTl30pGp5SS1CrfajKY="
+  - secure: Je2reYjeGIHHJC2tI6aNR+6GtlDV5B1xRdsazL/hEDJfgyCjIWJQGDR3JupyVlxVquB85J+JcOtlXuGZrbc6ibEhET0cXzpyMhfx8jpLc2e0ExUzuPV7XUlSnYkoIZYhXSQKHq81vApqdRv+whPXRIwTiYivpVygtqdS3rD7f5U=
+  - secure: ARd8K1Zong1RjQ6E2vx4dCWC8GRgNmRH8Jb26T6z9ojM8hl7Vl/lDBrI/Ub8ciYp0iJDNFucaNZWRBNP9YJUTOwe0AqAZzt+EcrmSGA7+ge9mEG1O2DM8Np+svbl44DJ5BNnct4Y6Zu9R+Fum3jqm+KAGeCRONoiQiVSsqglTd8=
 after_success:
-  - "[[ $TRAVIS_BRANCH == \"master\" && $TRAVIS_JDK_VERSION == \"oraclejdk8\" ]] && { cd $TRAVIS_BUILD_DIR/code && sbt --info ++$TRAVIS_SCALA_VERSION -Dtravis=1 publish; };"
+- '[[ $TRAVIS_BRANCH == "master" ]] && { cd $TRAVIS_BUILD_DIR/code && sbt --info ++$TRAVIS_SCALA_VERSION -Dtravis=1 publish; };'

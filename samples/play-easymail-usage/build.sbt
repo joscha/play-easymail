@@ -9,16 +9,11 @@ libraryDependencies ++= Seq(
   "com.feth" %% "play-easymail" % "0.7.0-SNAPSHOT"
 )
 
-resolvers ++= Seq(
-  "play-easymail (release)" at "http://joscha.github.io/play-easymail/repo/releases/",
-  "play-easymail (snapshot)" at "http://joscha.github.io/play-easymail/repo/snapshots/"
-)
-
-//  Uncomment the next line for local development of the Play Authenticate core:
+//  Uncomment the next line for local development of the Play Easymail core:
 //lazy val playEasymail = project.in(file("modules/play-easymail")).enablePlugins(PlayJava)
 
 lazy val root = (project in file("."))
   .enablePlugins(PlayJava)
-/*  Uncomment the next lines for local development of the Play Authenticate core: */
+/*  Uncomment the next lines for local development of the Play easymail core: */
 //  .dependsOn(playEasymail)
 //  .aggregate(playEasymail)

@@ -5,3 +5,6 @@ target
 tmp
 .history
 dist
+/bin/
+.cache-main
+.cache-tests

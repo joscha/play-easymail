@@ -1,10 +1,10 @@
-@(f: Form[Application.MailMe])
+@(f: Form[HomeController.MailMe])
 
 @import helper._
 
 @main("Welcome to Play 2.4") {
     
-    @form(routes.Application.sendMail) {
+    @form(routes.HomeController.sendMail) {
     	@inputText(
     		f("email")
     	)

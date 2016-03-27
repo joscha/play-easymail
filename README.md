@@ -67,7 +67,7 @@ You can also have a look at the [sample](samples/play-easymail-usage/app/control
 
 ## License
 
-Copyright (c) 2012-2015 Joscha Feth
+Copyright (c) 2012-2016 Joscha Feth
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License. You may obtain a copy of the License in the LICENSE file, or at:
 

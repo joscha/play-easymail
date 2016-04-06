@@ -3,9 +3,9 @@ package controllers;
 import org.apache.commons.mail.EmailAttachment;
 
 import com.feth.play.module.mail.DefaultMailer;
-import com.feth.play.module.mail.MailerImpl.Mail;
-import com.feth.play.module.mail.MailerImpl.Mail.Body;
-import com.feth.play.module.mail.MailerImpl.MailerFactory;
+import com.feth.play.module.mail.Mailer.Mail;
+import com.feth.play.module.mail.Mailer.Mail.Body;
+import com.feth.play.module.mail.Mailer.MailerFactory;
 import com.google.inject.Inject;
 
 import play.Environment;

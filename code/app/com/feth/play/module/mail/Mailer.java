@@ -1,22 +1,20 @@
 package com.feth.play.module.mail;
 
+import akka.actor.ActorSystem;
+import akka.actor.Cancellable;
+import com.google.inject.assistedinject.Assisted;
+import com.typesafe.config.Config;
+import play.libs.mailer.Email;
+import play.libs.mailer.MailerClient;
+import scala.concurrent.duration.Duration;
+import scala.concurrent.duration.FiniteDuration;
+
+import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-
-import com.google.inject.assistedinject.Assisted;
-
-import akka.actor.ActorSystem;
-import akka.actor.Cancellable;
-import play.Configuration;
-import play.libs.mailer.Email;
-import play.libs.mailer.MailerClient;
-import scala.concurrent.duration.Duration;
-import scala.concurrent.duration.FiniteDuration;
 
 public class Mailer implements IMailer {
 
@@ -40,7 +38,7 @@ public class Mailer implements IMailer {
 
 	protected final boolean includeXMailerHeader;
 
-	protected final Configuration configuration;
+	protected final Config configuration;
 
 	protected final MailerClient mailClient;
 
@@ -50,7 +48,7 @@ public class Mailer implements IMailer {
 		return getConfiguration().getString(SettingKeys.VERSION);
 	}
 
-	private Configuration getConfiguration() {
+	private Config getConfiguration() {
 		return configuration.getConfig(Configs.CONFIG_BASE);
 	}
 
@@ -76,19 +74,19 @@ public class Mailer implements IMailer {
 	}
 
 	@Inject
-	public Mailer(final Configuration configuration, @Assisted final Configuration mailerConfig,
-			final MailerClient mailClient, final ActorSystem actorSystem) {
+	public Mailer(final Config configuration, @Assisted final Config mailerConfig,
+				  final MailerClient mailClient, final ActorSystem actorSystem) {
 		this.configuration = configuration;
 		this.mailClient = mailClient;
 		this.actorSystem = actorSystem;
 
-		this.delay = Duration.create(mailerConfig.getLong(SettingKeys.DELAY, 1L), TimeUnit.SECONDS);
+		this.delay = Duration.create(mailerConfig.getLong(SettingKeys.DELAY), TimeUnit.SECONDS);
 
-		final Configuration fromConfig = mailerConfig.getConfig(SettingKeys.FROM);
+		final Config fromConfig = mailerConfig.getConfig(SettingKeys.FROM);
 		this.sender = getEmailName(fromConfig.getString(SettingKeys.FROM_EMAIL),
 				fromConfig.getString(SettingKeys.FROM_NAME));
 
-		this.includeXMailerHeader = mailerConfig.getBoolean(SettingKeys.INCLUDE_XMAILER_HEADER, true);
+		this.includeXMailerHeader = mailerConfig.getBoolean(SettingKeys.INCLUDE_XMAILER_HEADER);
 	}
 
 	public static class Mail extends Email {
@@ -180,17 +178,8 @@ public class Mailer implements IMailer {
 			this(subject, body, recipients, cc, bcc, null, null);
 		}
 
-		public Mail(final String subject, final Body body, final List<String> recipients, final String replyTo) {
-			this(subject, body, recipients, null, null, null, replyTo);
-		}
-
 		public Mail(final String subject, final Body body, final List<String> recipients, final List<String> cc,
-				final String replyTo) {
-			this(subject, body, recipients, cc, null, null, replyTo);
-		}
-
-		public Mail(final String subject, final Body body, final List<String> recipients, final List<String> cc,
-				final List<String> bcc, final String replyTo) {
+				final List<String> bcc, final List<String> replyTo) {
 			this(subject, body, recipients, cc, bcc, null, replyTo);
 		}
 
@@ -210,7 +199,7 @@ public class Mailer implements IMailer {
 		}
 
 		public Mail(final String subject, final Body body, final List<String> recipients, final List<String> cc,
-				final List<String> bcc, final Map<String, List<String>> customHeaders, final String replyTo) {
+				final List<String> bcc, final Map<String, List<String>> customHeaders, final List<String> replyTo) {
 			if (subject == null || subject.trim().isEmpty()) {
 				throw new RuntimeException("Subject must not be null or empty");
 			}
@@ -269,7 +258,7 @@ public class Mailer implements IMailer {
 	}
 
 	public interface MailerFactory {
-		public Mailer create(final Configuration mailerConfig);
+		public Mailer create(final Config mailerConfig);
 	}
 
 	@Override

@@ -1,12 +1,12 @@
 name := "play-easymail-usage"
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.12.2"
 
 version := "1.0-SNAPSHOT"
 
 libraryDependencies ++= Seq(
   // Comment the next line for local development:
-  "com.feth" %% "play-easymail" % "0.8.2-SNAPSHOT"
+  "com.feth" %% "play-easymail" % "0.9.0-SNAPSHOT"
 )
 //  Uncomment the next line for local development of the Play Easymail core:
 //lazy val playEasymail = project.in(file("modules/play-easymail")).enablePlugins(PlayJava)

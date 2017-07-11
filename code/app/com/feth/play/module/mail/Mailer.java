@@ -231,7 +231,8 @@ public class Mailer implements IMailer {
 					}
 				}
 			}
-			this.setReplyTo(replyTo);
+			if (replyTo != null && replyTo.size() > 0)
+				this.setReplyTo(replyTo);
 		}
 
 		public Body getBody() {

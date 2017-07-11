@@ -6,7 +6,8 @@ version := "1.0-SNAPSHOT"
 
 libraryDependencies ++= Seq(
   // Comment the next line for local development:
-  "com.feth" %% "play-easymail" % "0.9.0-SNAPSHOT"
+  // Use the latest release version when copying this code, e.g. "0.9.0"
+  "com.feth" %% "play-easymail" % "0.9.1-SNAPSHOT"
 )
 //  Uncomment the next line for local development of the Play Easymail core:
 //lazy val playEasymail = project.in(file("modules/play-easymail")).enablePlugins(PlayJava)

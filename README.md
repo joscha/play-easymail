@@ -33,7 +33,7 @@ You can also have a look at the [sample](samples/play-easymail-usage/app/control
   * cross-release for Scala 2.11 and 2.12
 * **0.9.0** [2017-07-11]
   * Support for play 2.6.x (thanks @KadekM)
-  * ATTENTION: This is for Play 2.6 - if you have Play 2.5, use a `0.7.x` version.
+  * ATTENTION: This is for Play 2.6 - if you have Play 2.5, use a `0.8.x` version.
 * **0.8.1** [2016-12-16]
   * Support for play 2.5.x (thanks @oexza)
   * ATTENTION: This is for Play 2.5 - if you have Play 2.4, use a `0.7.x` version.

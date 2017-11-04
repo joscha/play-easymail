@@ -29,6 +29,8 @@ Mailer.getDefaultMailer().sendMail(
 You can also have a look at the [sample](samples/play-easymail-usage/app/controllers/Application.java) for a more advanced use-case (content from templates and setting custom headers).
 
 ## Versions
+* **0.9.4** [2017-11-04]
+  * new play mailer library
 * **0.9.3** [2017-07-12]
   * cross-release for Scala 2.11 and 2.12
 * **0.9.0** [2017-07-11]
